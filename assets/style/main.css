@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-    input {
-        @apply align-middle p-4;
-    }
+  input {
+    @apply align-middle p-4;
+  }
 }
 
 /**
@@ -14,27 +14,41 @@
  *  appliance-select.js
  */
 input.focus ~ ul {
-    @apply w-full md:w-96 lg:w-144 h-auto overflow-hidden z-10;
+  @apply w-full md:w-96 lg:w-144 h-auto overflow-hidden z-10;
 }
 
-input.focus ~ ul.ingredients {@apply h-250;}
-input.focus ~ ul.appliances {@apply h-60 lg:h-52;}
-input.focus ~ ul.ustensils {@apply h-250;}
+input.focus ~ ul.ingredients {
+  @apply h-250 overflow-y-auto;
+}
+input.focus ~ ul.appliances {
+  @apply h-60 lg:h-52;
+}
+input.focus ~ ul.ustensils {
+  @apply h-250;
+}
 
 input.focus ~ ul.search {
-    @apply h-auto;
+  @apply h-auto;
 }
 
 input:focus + label {
-    @apply hidden;
+  @apply hidden;
 }
 
 /**
  *  USED BY :
  *  search-params.js
  */
- .searchParams > span {@apply py-2 px-4 inline-block mt-4 mr-2 rounded-md text-white cursor-pointer;}
+.searchParams > span {
+  @apply py-2 px-4 inline-block mt-4 mr-2 rounded-md text-white cursor-pointer;
+}
 
- .searchParams > span.ingredient {@apply bg-blue-500;}
- .searchParams > span.appliance {@apply bg-green-500;}
- .searchParams > span.ustensil {@apply bg-red-500;}
+.searchParams > span.ingredient {
+  @apply bg-blue-500;
+}
+.searchParams > span.appliance {
+  @apply bg-green-500;
+}
+.searchParams > span.ustensil {
+  @apply bg-red-500;
+}

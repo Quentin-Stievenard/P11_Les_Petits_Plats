@@ -22,7 +22,6 @@ export function search(request, appliance, ustensil, ingredients) {
   recipes = matchContent(recipes, request.toLowerCase());
   //save the result
   lastSearch = [appliance, ustensil, ingredients, recipes];
-  console.timeEnd("search");
   return recipes;
 }
 

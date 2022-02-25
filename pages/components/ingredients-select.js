@@ -1,23 +1,15 @@
-/**
- * A select menu for recipes using a specific appliance
- * 
- * WARNING
- * Lot of code here is duplicated with the other select
- * menu. For the future, it'll be better to make a <select>
- * coponent parent, and different child version. 
- */
- export class IngredientsSelect extends HTMLElement {
-    constructor() {
-        super();
-        this.allIngredients = new Set();
-    } 
-    
-    /**
-     * Insert a empty select template then call render()
-     */
-    connectedCallback () {
-        const template = document.createElement('template');
-        template.innerHTML = `
+export class IngredientsSelect extends HTMLElement {
+  constructor() {
+    super();
+    this.allIngredients = new Set();
+  }
+
+  /**
+   * Insert a empty select template then call render()
+   */
+  connectedCallback() {
+    const template = document.createElement("template");
+    template.innerHTML = `
             <div class="relative">
                 <input type="text" placeholder="Rechercher un ingrédient..."
                     class="ingredient placeholder bg-blue-500 text-transparent placeholder-transparent font-bold rounded-md focus:rounded-b-none
@@ -31,71 +23,79 @@
                 </ul>
             </div>
       `;
-        this.appendChild(template.content);
-        this.queryIngredients();
-        this.render("");
-        this.test();
-        this.listenInput();
-    }
+    this.appendChild(template.content);
+    this.queryIngredients();
+    this.render("");
+    this.test();
+    this.listenInput();
+  }
 
-    test() {
-        this.querySelector("input").addEventListener("focus", () => {
-            this.querySelector("input").classList.add("focus");
-        })
-        window.addEventListener("click", event => {
-            if (event.target.parentElement !== this.querySelector("div")) {
-                this.querySelector("input").classList.remove("focus")
-            }
-        })
-        window.addEventListener('keyup', event => { 
-            if(event.key == "Tab") {
-                if (document.activeElement !== this.querySelector("input")) {
-                    this.querySelector("input").classList.remove("focus")
-                }
-            }
-        })
-    }
-
-    /**
-     * 
-     */
-    queryIngredients() {
-        data.recipes.forEach(recipe => recipe.ingredients.forEach(ingredient => this.allIngredients.add(ingredient.ingredient)))
-    }
-
-    /**
-     * 
-     */
-    render(request) {
-        this.querySelectorAll("li").forEach(element => {element.remove()})
-        let ingredients = [];
-        if(request === "") { 
-            ingredients = [...this.allIngredients].sort().slice(0,30);
-            this.querySelector("ul").classList.remove("search");
+  test() {
+    this.querySelector("input").addEventListener("focus", () => {
+      this.querySelector("input").classList.add("focus");
+    });
+    window.addEventListener("click", (event) => {
+      if (event.target.parentElement !== this.querySelector("div")) {
+        this.querySelector("input").classList.remove("focus");
+      }
+    });
+    window.addEventListener("keyup", (event) => {
+      if (event.key == "Tab") {
+        if (document.activeElement !== this.querySelector("input")) {
+          this.querySelector("input").classList.remove("focus");
         }
-        else {
-            ingredients = [...this.allIngredients].sort().filter(ingredient => ingredient.toLowerCase().includes(request.toLowerCase())).slice(0,30);
-            this.querySelector("ul").classList.add("search");
-        }
-        ingredients.forEach(ingredient => {
-            this.querySelector("ul").insertAdjacentHTML('beforeend', `
+      }
+    });
+  }
+
+  /**
+   *
+   */
+  queryIngredients() {
+    data.recipes.forEach((recipe) =>
+      recipe.ingredients.forEach((ingredient) =>
+        this.allIngredients.add(ingredient.ingredient)
+      )
+    );
+  }
+
+  /**
+   *
+   */
+  render(request) {
+    this.querySelectorAll("li").forEach((element) => {
+      element.remove();
+    });
+    let ingredients = [];
+    if (request === "") {
+      ingredients = [...this.allIngredients].sort();
+      this.querySelector("ul").classList.remove("search");
+    } else {
+      ingredients = [...this.allIngredients].sort();
+      this.querySelector("ul").classList.add("search");
+    }
+    ingredients.forEach((ingredient) => {
+      this.querySelector("ul").insertAdjacentHTML(
+        "beforeend",
+        `
                 <li class="leading-normal w-full md:w-48 py-2 px-4 overflow-ellipsis whitespace-nowrap overflow-hidden
-                        cursor-pointer hover:bg-blue-700">`
-                        + ingredient + 
-                `</li>
-            `)
-        })
-    }
+                        cursor-pointer hover:bg-blue-700">` +
+          ingredient +
+          `</li>
+            `
+      );
+    });
+  }
 
-    /**
-     * 
-     */
-    listenInput() {
-        this.querySelector("input").addEventListener('input', input => {
-            this.render(input.target.value);
-        })
-    }
+  /**
+   *
+   */
+  listenInput() {
+    this.querySelector("input").addEventListener("input", (input) => {
+      this.render(input.target.value);
+    });
+  }
 }
 
 // Import the DB with all the recipes
-import data from "../../assets/data/data.json"
+import data from "../../assets/data/data.json";
