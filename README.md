@@ -66,7 +66,7 @@ Le projet Les Petits Plats est une projet d'application web entièrement dévelo
 
 ### Algo B
 
-![](./algB.drawio.png)
+![](./alg 2.drawio.png)
 
 ### Performances
 
