@@ -66,13 +66,13 @@ Le projet Les Petits Plats est une projet d'application web entièrement dévelo
 
 ### Algo B
 
-![](./algB.drawio.png)
+![](./alg 2.drawio.png)
 
 ### Performances
 
 | requete                    | A    | B    |
 |----------------------------|------|------|
-| "Poir"                     | 0.17 | 0.30 |
+| "Poire"                     | 0.17 | 0.30 |
 | "", [ "bananes","ananas" ] | 0.27 | 0.13 |
 | "trop",  [ "ananas" ]      | 0.50 | 0.16 |
 
