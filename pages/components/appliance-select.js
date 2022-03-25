@@ -7,17 +7,17 @@
  * coponent parent, and different child version.
  */
 export class ApplianceSelect extends HTMLElement {
-  constructor() {
-    super();
-    this.allAppliances = new Set();
-  }
+    constructor() {
+        super();
+        this.allAppliances = new Set();
+    }
 
-  /**
-   * Insert a empty select template then call render()
-   */
-  connectedCallback() {
-    const template = document.createElement("template");
-    template.innerHTML = `
+    /**
+     * Insert a empty select template then call render()
+     */
+    connectedCallback() {
+        const template = document.createElement("template");
+        template.innerHTML = `
             <div class="relative">
                 <input type="text" placeholder="Rechercher un appareil..."
                     class="appliance placeholder bg-green-400 text-transparent placeholder-transparent font-bold rounded-md focus:rounded-b-none
@@ -27,91 +27,91 @@ export class ApplianceSelect extends HTMLElement {
                     Appareils
                 </label>
                 <ul class="appliances absolute top-14 flex flex-row flex-wrap bg-green-400 font-bold text-white
-                        w-full md:w-48 h-0 rounded-b-md transition-all duration-200 overflow-hidden" id="appliance-select>
+                        w-full md:w-48 h-0 rounded-b-md transition-all duration-200 overflow-hidden" id="appliance-select">
                 </ul>
             </div>
         `;
-    this.appendChild(template.content);
-    this.queryAppliance();
-    this.render("");
-    this.test();
-    this.listenInput();
-  }
-
-  test() {
-    this.querySelector("input").addEventListener("focus", () => {
-      this.querySelector("input").classList.add("focus");
-    });
-    window.addEventListener("click", (event) => {
-      if (event.target.parentElement !== this.querySelector("div")) {
-        this.querySelector("input").classList.remove("focus");
-      }
-    });
-    window.addEventListener("keyup", (event) => {
-      if (event.key == "Tab") {
-        if (document.activeElement !== this.querySelector("input")) {
-          this.querySelector("input").classList.remove("focus");
-        }
-      }
-    });
-  }
-
-  /**
-   *
-   */
-  queryAppliance() {
-    data.recipes.forEach((recipe) => this.allAppliances.add(recipe.appliance));
-  }
-
-  /**
-   *
-   */
-  render(request) {
-    this.querySelectorAll("li").forEach((element) => {
-      element.remove();
-    });
-    let appliances = [];
-    if (request === "") {
-      appliances = [...this.allAppliances].sort();
-      this.querySelector("ul").classList.remove("search");
-    } else {
-      appliances = [...this.allAppliances].sort();
-
-      this.querySelector("ul").classList.add("search");
+        this.appendChild(template.content);
+        this.queryAppliance();
+        this.render("");
+        this.test();
+        this.listenInput();
     }
-    appliances.forEach((appliance) => {
-      this.querySelector("ul").insertAdjacentHTML(
-        "beforeend",
-        `
+
+    test() {
+        this.querySelector("input").addEventListener("focus", () => {
+            this.querySelector("input").classList.add("focus");
+        });
+        window.addEventListener("click", (event) => {
+            if (event.target.parentElement !== this.querySelector("div")) {
+                this.querySelector("input").classList.remove("focus");
+            }
+        });
+        window.addEventListener("keyup", (event) => {
+            if (event.key == "Tab") {
+                if (document.activeElement !== this.querySelector("input")) {
+                    this.querySelector("input").classList.remove("focus");
+                }
+            }
+        });
+    }
+
+    /**
+     *
+     */
+    queryAppliance() {
+        data.recipes.forEach((recipe) => this.allAppliances.add(recipe.appliance));
+    }
+
+    /**
+     *
+     */
+    render(request) {
+        this.querySelectorAll("li").forEach((element) => {
+            element.remove();
+        });
+        let appliances = [];
+        if (request === "") {
+            appliances = [...this.allAppliances].sort();
+            this.querySelector("ul").classList.remove("search");
+        } else {
+            appliances = [...this.allAppliances].sort();
+
+            this.querySelector("ul").classList.add("search");
+        }
+        appliances.forEach((appliance) => {
+            this.querySelector("ul").insertAdjacentHTML(
+                "beforeend",
+                `
                 <li class="leading-normal w-full md:w-48 py-2 px-4 overflow-ellipsis whitespace-nowrap overflow-hidden
                         cursor-pointer hover:bg-green-700">` +
-          appliance +
-          `</li>
+                appliance +
+                `</li>
             `
-      );
-    });
-  }
+            );
+        });
+    }
 
-  renderWithFoundAppliance(appliances) {
-    const applianceSelectHTML = document.getElementById("ingredients-select");
-    if (applianceSelectHTML != null) {
-      applianceSelectHTML.innerHTML = ``;
-      appliances.forEach((appliance) => {
-        applianceSelectHTML.innerHTML += `
+    renderWithFoundAppliance(appliances) {
+        const applianceSelectHTML = document.getElementById("ingredients-select");
+        if (applianceSelectHTML != null) {
+            applianceSelectHTML.innerHTML = ``;
+            appliances.forEach((appliance) => {
+                applianceSelectHTML.innerHTML += `
               <li class="leading-normal w-full md:w-48 py-2 px-4 overflow-ellipsis whitespace-nowrap overflow-hidden cursor-pointer hover:bg-blue-700">${appliance.appliance}</li>
             `;
-      });
+            });
+        }
     }
-  }
 
-  /**
-   *
-   */
-  listenInput() {
-    this.querySelector("input").addEventListener("input", (input) => {
-      this.render(input.target.value);
-    });
-  }
+    /**
+     *
+     */
+    listenInput() {
+        this.querySelector("input").addEventListener("input", (input) => {
+            this.render(input.target.value);
+        });
+    }
 }
 
 // Import the DB with all the recipes

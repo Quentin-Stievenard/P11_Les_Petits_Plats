@@ -1,15 +1,10 @@
-/**
- * An imput used for the search
- */
 export class SearchParams extends HTMLElement {
   constructor() {
     super();
     this.lastSearch = [];
+    this.ingredientSelect = new IngredientsSelect();
   }
 
-  /**
-   * Insert a input template used by the search
-   */
   connectedCallback() {
     const template = document.createElement("template");
     template.innerHTML = `
@@ -23,26 +18,6 @@ export class SearchParams extends HTMLElement {
 
   render() {
     this.lastSearch = getLastSearch();
-    const foundRecipes = this.lastSearch[3] || [];
-    let ingredients = [];
-    for (const recipe of foundRecipes) {
-      console.log(recipe);
-      for (const ingredient of recipe.ingredients) {
-        ingredients.push(ingredient);
-      }
-    }
-
-    let appliances = [];
-    for (const recipe of foundRecipes) {
-      console.log(recipe);
-      for (const appliance of recipe.appliance) {
-        appliances.push(appliance);
-      }
-    }
-
-    const ingredientSelect = new IngredientsSelect();
-    ingredientSelect.renderWithFoundIngredients(ingredients);
-    // console.log(ingredients);
     this.querySelector("div").innerHTML = "";
     if (this.lastSearch[2]) {
       let ingredients = this.lastSearch[2];
@@ -50,39 +25,79 @@ export class SearchParams extends HTMLElement {
         this.querySelector("div").insertAdjacentHTML(
           "beforeEnd",
           `
-                <span class="ingredient">` +
+            <span class="ingredient">` +
             ingredient +
             `</span>
-                `
+            `
         );
       });
     }
-
-    const applianceSelect = new ApplianceSelect();
-    applianceSelect.renderWithFoundAppliance(appliances);
     if (this.lastSearch[0]) {
-      let appliances = this.lastSearch[2];
-      appliances.forEach((appliance) => {
-        this.querySelector("div").insertAdjacentHTML(
-          "beforeEnd",
-          `
-                  <span class="ingredient">` +
-            appliance +
-            `</span>
-                  `
-        );
-      });
-    }
-    if (this.lastSearch[1]) {
+      let appliances = this.lastSearch[0];
       this.querySelector("div").insertAdjacentHTML(
         "beforeEnd",
         `
-            <span class="ustensil">` +
-          this.lastSearch[1] +
+        <span class="appliance">` +
+          appliances +
           `</span>
-            `
+        `
       );
     }
+    if (this.lastSearch[1]) {
+      let ustensils = this.lastSearch[1];
+      this.querySelector("div").insertAdjacentHTML(
+        "beforeEnd",
+        `
+        <span class="ustensil">` +
+          ustensils +
+          `</span>
+        `
+      );
+    }
+    this.listeners();
+    const foundRecipes = this.lastSearch[3] || [];
+
+    let ingredients = [];
+    let ustensils = [];
+    let appliances = Array.from(
+      new Set(foundRecipes.map((recipe) => recipe.appliance))
+    );
+
+    for (const recipe of foundRecipes) {
+      for (const ingredient of recipe.ingredients) {
+        ingredients.push(ingredient);
+      }
+      for (const ustensil of recipe.ustensils) {
+        ustensils.push(ustensil);
+      }
+    }
+
+    if (this.lastSearch[2]) {
+      const ingredientsList = document.getElementById("ingredients-select");
+      ingredientsList.innerHTML = ``;
+      ingredients.forEach((ingredient) => {
+        ingredientsList.innerHTML += `
+                  <li class="leading-normal w-full md:w-48 py-2 px-4 overflow-ellipsis whitespace-nowrap overflow-hidden cursor-pointer hover:bg-blue-700">${ingredient.ingredient}</li>
+                `;
+      });
+
+      const applianceSelect = document.getElementById("appliance-select");
+      applianceSelect.innerHTML = "";
+      appliances.forEach((appliance) => {
+        applianceSelect.innerHTML += `
+                  <li class="leading-normal w-full md:w-48 py-2 px-4 overflow-ellipsis whitespace-nowrap overflow-hidden cursor-pointer hover:bg-blue-700">${appliance}</li>
+              `;
+      });
+
+      const ustensilList = document.getElementById("ustensil-select");
+      ustensilList.innerHTML = "";
+      ustensils.forEach((ustensil) => {
+        ustensilList.innerHTML += `
+                    <li class="leading-normal w-full md:w-48 py-2 px-4 overflow-ellipsis whitespace-nowrap overflow-hidden cursor-pointer hover:bg-blue-700">${ustensil}</li>
+              `;
+      });
+    }
+
     this.listeners();
   }
 
