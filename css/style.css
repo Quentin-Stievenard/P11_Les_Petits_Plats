@@ -11567,7 +11567,6 @@ header .navbar-expand .nav-dropdown-ustensils {
   max-height: 4em;
   width: 9em;
   min-width: 9em;
-  overflow: scroll;
 }
 header .navbar-expand .nav-dropdown-ingredients .button-tags,
 header .navbar-expand .nav-dropdown-appliances .button-tags,

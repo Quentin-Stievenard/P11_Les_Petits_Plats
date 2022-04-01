@@ -12,6 +12,7 @@ export class Dropdown {
     this.input = document.querySelector(`#search-${this.dataType}`);
     this.button = document.querySelector(`#button-${this.dataType}`);
     this.ul = document.querySelector(`.nav-list-${this.dataType}`);
+    this.isSearching = false;
     this.openDropdown();
   }
 
@@ -117,7 +118,9 @@ export class Dropdown {
     chevronUp.addEventListener("click", () => this.closeDropdown());
     this.initListeners();
     this.closeDropdownIfClickOutside();
-    this.initListenersInput();
+    if (this.isSearching == false) {
+      this.initListenersInput();
+    }
   }
 
   closeDropdownIfClickOutside() {
@@ -196,14 +199,15 @@ export class Dropdown {
 
   initListenersInput() {
     this.input.addEventListener("keydown", (e) => {
-      if (e.target.value.length >= 0) {
-        const searchBar = document.getElementById(`search-${this.dataType}`);
-        const valueInput = searchBar.value.toLowerCase();
+      const searchBar = document.getElementById(`search-${this.dataType}`);
+      const valueInput = searchBar.value.toLowerCase();
+      if (e.target.value.length >= 1) {
+        this.isSearching = true;
         this.ul.innerHTML = "";
-
         this.filterElementsWithInputOfDropdown(valueInput);
       } else if (e.target.value.length === 0) {
         this.ul.innerHTML = "";
+        this.isSearching = false;
       }
     });
   }
