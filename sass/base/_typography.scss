@@ -1,0 +1,32 @@
+@font-face {
+  font-family: DM_Sans_Regular;
+  src: url(/css/font/DM-Sans/DMSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: Lato_Bold;
+  src: url(./font/Lato/Lato-Bold.ttf);
+}
+
+@font-face {
+  font-family: Lato_Light;
+  src: url(./font/Lato/Lato-Light.ttf);
+}
+
+@font-face {
+  font-family: Roboto_Regular;
+  src: url(./font/roboto/Roboto-Regular.ttf);
+}
+
+body {
+  h1 {
+    font-family: DM_Sans;
+  }
+  main {
+    article {
+      .description {
+        font-family: Roboto_Regular;
+      }
+    }
+  }
+}

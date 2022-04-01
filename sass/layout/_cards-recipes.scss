@@ -1,0 +1,64 @@
+main {
+  .msg-error {
+    .msg-no-recipe {
+      font-size: 2em;
+      padding-top: 2em;
+    }
+  }
+  .part-recipes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    article {
+      width: 23em;
+      height: 23.5em;
+      background-color: $secondary;
+      border-radius: 0.3em;
+      overflow: hidden;
+      .picture {
+        background-color: #c7bebe;
+        height: 10em;
+        object-fit: cover;
+        width: 100%;
+        border-radius: 0.3em 0.3em 0 0;
+      }
+      .name-and-time,
+      .ingredients-and-description {
+        display: flex;
+        justify-content: space-between;
+        padding: 1em 1em 0em 1em;
+      }
+      .name-and-time {
+        justify-content: space-between;
+        h2 {
+          font-size: 1.3em;
+          color: $black;
+          font-weight: bold;
+        }
+        p {
+          font-weight: bold;
+        }
+      }
+      .ingredients-and-description {
+        padding-top: 0;
+        font-size: 0.7em;
+        .ingredients {
+          padding: 0em 1em 0em 0.5em;
+          .ingredient {
+            margin-bottom: 0;
+            .name-ingredient {
+              font-weight: bold;
+            }
+          }
+        }
+        .description {
+          width: 15em;
+          display: -webkit-box;
+          -webkit-line-clamp: 7;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}

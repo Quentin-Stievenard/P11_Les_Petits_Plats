@@ -1,0 +1,10 @@
+@import "./utils/variable_overrides";
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "./base/typography";
+
+@import "./layout/banner";
+@import "./layout/search-bar";
+@import "./layout/nav";
+@import "./layout/cards-recipes";
+@import "./layout/tags-container";
