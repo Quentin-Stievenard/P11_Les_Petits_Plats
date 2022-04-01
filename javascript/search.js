@@ -1,8 +1,5 @@
 import { recipes } from "./data_recipes/recipes_data.js";
 
-/**
- * DOM
- */
 const searchBar = document.getElementById("research");
 
 export class Search {
@@ -14,9 +11,6 @@ export class Search {
     this.initListeners();
   }
 
-  /**
-   * Listeners
-   */
   initListeners() {
     searchBar.addEventListener("keyup", (e) => {
       if (e.target.value.length >= 3) {
@@ -31,11 +25,7 @@ export class Search {
     });
   }
 
-  /**
-   * Create an array of recipes that matches with search field
-   */
   recipesFilteredWithInput() {
-    // start of code for solution 1
     let recipesFiltered = [];
     const valueInput = searchBar.value.toLowerCase();
     for (let i = 0; i < recipes.length; i++) {
@@ -74,10 +64,8 @@ export class Search {
         recipeDom.style.display = "none";
       }
     }
-    // End of code for solution 1
 
     if (this.selectedTag.size) {
-      // if there are tags selected
       this.recipesFiltered = recipesFiltered.filter((recipe) => {
         const shouldBeKept = Array.from(this.selectedTag).every((tag) => {
           return (
@@ -113,9 +101,6 @@ export class Search {
     }
   }
 
-  /**
-   * Display all recipes when the value of search input is less than 3 caracters
-   */
   displayAllRecipes() {
     for (let i = 0; i < this.recipes.length; i++) {
       const recipeDom = document.querySelector(

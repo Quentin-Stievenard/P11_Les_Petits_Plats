@@ -15,9 +15,6 @@ export class Dropdown {
     this.openDropdown();
   }
 
-  /**
-   * Open dropdown
-   */
   openDropdown() {
     const isExpanded = this.button.getAttribute(`aria-expanded`);
     if (isExpanded === "false") {
@@ -29,9 +26,6 @@ export class Dropdown {
     this.filterElementsOfDropdown();
   }
 
-  /**
-   * Display filtered elements of dropdown
-   */
   filterElementsOfDropdown() {
     let elementsFiltered = new Set();
     if (this.dataType == "ingredients") {
@@ -85,9 +79,6 @@ export class Dropdown {
     this.createHtmlDropdown(Array.from(elementsMatched));
   }
 
-  /**
-   * Close dropdown
-   */
   closeDropdown() {
     this.button.setAttribute("aria-expanded", "false");
     this.chevron.innerHTML = `<span class="fas fa-chevron-down"></span>`;
@@ -123,7 +114,6 @@ export class Dropdown {
     this.label.style.display = "none";
     this.input.style.display = "block";
     this.input.focus();
-    // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
     this.initListeners();
     this.closeDropdownIfClickOutside();
@@ -174,9 +164,6 @@ export class Dropdown {
     });
   }
 
-  /**
-   * Listeners when click on element of dropdown
-   */
   initListeners() {
     const li = Array.from(
       document.querySelectorAll(
@@ -199,7 +186,6 @@ export class Dropdown {
             this.selectedTags
           );
           this.filterElementsOfDropdown();
-          // empty searchbar of dropdown is more 3 characters and click on element on dropdown
           if (this.input.value.length >= 3) {
             this.input.value = "";
           }
@@ -208,18 +194,15 @@ export class Dropdown {
     });
   }
 
-  /**
-   * Listeners of inputs dropdowns
-   */
   initListenersInput() {
     this.input.addEventListener("keydown", (e) => {
-      if (e.target.value.length >= 3) {
+      if (e.target.value.length >= 0) {
         const searchBar = document.getElementById(`search-${this.dataType}`);
         const valueInput = searchBar.value.toLowerCase();
         this.ul.innerHTML = "";
 
         this.filterElementsWithInputOfDropdown(valueInput);
-      } else if (e.target.value.length >= 1) {
+      } else if (e.target.value.length === 0) {
         this.ul.innerHTML = "";
       }
     });
@@ -245,9 +228,6 @@ export class Dropdown {
     this.initRemoveTagListener();
   }
 
-  /**
-   * Remove tag with cross of tag
-   */
   initRemoveTagListener() {
     const crossTag = document.querySelectorAll(".fa-times-circle");
     crossTag.forEach((cross) => {

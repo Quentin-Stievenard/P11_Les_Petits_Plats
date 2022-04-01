@@ -7,25 +7,17 @@ const ingredients = new Set();
 const appliances = new Set();
 const ustensils = new Set();
 
-/**
- * Display all recipes when the page loads
- */
 export class HomePage {
   constructor() {
     this.selectedTags = new Set();
     this.initHomePage();
   }
 
-  /**
-   * create array of ingredients, array of appliances and array of ustensils
-   */
   initHomePage() {
-    // Display all recipes
     recipes.forEach((recipe) => {
       new Recipe(recipe);
     });
 
-    // Generate array of ingredients, array of appliances and array of ustensils
     recipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
         ingredients.add(ingredient.ingredient);
@@ -36,7 +28,6 @@ export class HomePage {
       });
     });
 
-    // Part dropdowns
     let dataTypeDropdown = "";
     const searchBar = new Search(recipes, dataTypeDropdown, this.selectedTags);
     const chevronDownIngredients = document.querySelector(
@@ -93,7 +84,4 @@ export class HomePage {
   }
 }
 
-/**
- * loading home page
- */
 window.onload = new HomePage();

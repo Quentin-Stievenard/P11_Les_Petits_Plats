@@ -10,9 +10,6 @@ export class Recipe {
     this.createHtmlRecipe();
   }
 
-  /**
-   * Create HTML for recipes cards
-   */
   createHtmlRecipe() {
     const mainRecipe = document.querySelector(".part-recipes");
     mainRecipe.innerHTML +=
