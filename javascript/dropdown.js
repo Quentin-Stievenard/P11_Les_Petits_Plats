@@ -213,13 +213,13 @@ export class Dropdown {
    */
   initListenersInput() {
     this.input.addEventListener("keydown", (e) => {
-      if (e.target.value.length >= 3) {
+      if (e.target.value.length >= 0) {
         const searchBar = document.getElementById(`search-${this.dataType}`);
         const valueInput = searchBar.value.toLowerCase();
         this.ul.innerHTML = "";
 
         this.filterElementsWithInputOfDropdown(valueInput);
-      } else if (e.target.value.length >= 1) {
+      } else if (e.target.value.length === 0) {
         this.ul.innerHTML = "";
       }
     });

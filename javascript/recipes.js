@@ -29,7 +29,7 @@ export class Recipe {
         })
         .join(",") +
       `">
-        <img class="picture" src="../images/placeholder.jpg" ></img>
+        <img class="picture" src="../images/placeholder.jpg"/>
         <div class="name-and-time">
             <h2 class="name" data-name="${this.name}">${this.name}</h2>
             <p><i class="far fa-clock"></i> ${this.time} min</p>

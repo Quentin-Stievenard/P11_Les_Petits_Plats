@@ -4,6 +4,14 @@ main {
       font-size: 2em;
       padding-top: 2em;
     }
+    .tags-container .tags {
+      color: white;
+      border-radius: 0.3em;
+      padding: 0.5em 1em;
+      max-width: 250px;
+      display: flex;
+      justify-content: center;
+    }
   }
   .part-recipes {
     display: flex;
@@ -18,8 +26,8 @@ main {
       .picture {
         background-color: #c7bebe;
         height: 10em;
-        object-fit: cover;
         width: 100%;
+        object-fit: cover;
         border-radius: 0.3em 0.3em 0 0;
       }
       .name-and-time,

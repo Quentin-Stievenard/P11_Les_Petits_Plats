@@ -11953,7 +11953,7 @@ main .part-recipes article .ingredients-and-description .description {
   color: white;
   border-radius: 0.3em;
   padding: 0.5em 1em;
-  max-width: 8em;
+  max-width: 250px;
   display: flex;
   justify-content: center;
 }

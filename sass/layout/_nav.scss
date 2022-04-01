@@ -59,6 +59,9 @@ header {
         }
       }
     }
+    .input-tag:focus {
+      border: none;
+    }
     .nav-dropdown-ingredients {
       background-color: $ingredient-color;
       .button-tags {
